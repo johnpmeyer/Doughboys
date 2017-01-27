@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Doughboys</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="name">Name</string>
+    <string name="Email">Email Address</string>
+    <string name="password_confirmation">Confirm Password</string>
+    <string name="signup">Sign Me Up!</string>
+    <string name="first_signup">No Account? Sign Up!</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="add_review">Add Review</string>
+    <string name="update">Update</string>
+    <string name="logout">Logout</string>
+    <string name="delete">Delete</string>
+    <string name="restaurant_name">Restaurant Name:</string>
+    <string name="insert_name">Insert Name</string>
+    <string name="city">City:</string>
+    <string name="insert_city">Insert City</string>
+    <string name="rating">Rating:</string>
+    <string name="submit">Submit</string>
+    <string name="next">Next</string>
+    <string name="crust">Crust</string>
+    <string name="cost">Cost</string>
+    <string name='sauce'>Sauce</string>
+    <string name="overall_rating">Overall Rating</string>
+</resources>
