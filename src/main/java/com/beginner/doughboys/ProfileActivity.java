@@ -13,6 +13,7 @@ import android.widget.Toast;
 public class ProfileActivity extends AppCompatActivity {
 
     DatabaseHelper helper = new DatabaseHelper(this);
+    RestaurantDatabaseHelper restaurantHelper = new RestaurantDatabaseHelper(this);
     String id, username, name, email, password;
     EditText profileNameEditText, profileUsernameEditText, profilePasswordEditText;
 
@@ -38,6 +39,8 @@ public class ProfileActivity extends AppCompatActivity {
         profileNameEditText.setText(name);
         profileUsernameEditText.setText(username);
         profilePasswordEditText.setText(password);
+
+        showUserReviews();
 
     }
 
@@ -70,6 +73,27 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(myIntent);
         } else {
             Toast.makeText(this, "Profile deletion unsuccessful", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void showUserReviews() {
+
+        Cursor thisCursor = restaurantHelper.getAllData();
+
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("Reviews:"+"\n\n");
+
+        while(thisCursor.moveToNext()) {
+            if(thisCursor.getString(1).equals(username)) {
+                buffer.append("City: " + thisCursor.getString(3) + "\n");
+                buffer.append("Restaurant: " + thisCursor.getString(2) + "\n");
+                buffer.append("Overall Rating: " + thisCursor.getString(4)+"\n\n");
+            }
+
+            TextView ReviewView = (TextView) findViewById(R.id.profileReviewTextView);
+            ReviewView.setText(buffer.toString());
+            Log.d("MY_LOG", thisCursor.getString(0)+ thisCursor.getString(1)+
+                    thisCursor.getString(2)+ thisCursor.getString(3) + thisCursor.getString(4));
         }
     }
 }

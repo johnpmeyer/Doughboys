@@ -5,8 +5,12 @@ package com.beginner.doughboys;
  */
 
 public class Review {
-    String restaurantName, restaurantCity;
+    String username, restaurantName, restaurantCity;
     Float rating;
+
+    public String getUsername() {return username;}
+
+    public void setUsername(String username) {this.username = username;}
 
     public String getRestaurantName() {
         return restaurantName;

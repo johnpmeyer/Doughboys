@@ -33,17 +33,16 @@ public class ReviewDetails extends AppCompatActivity {
 
     public void submitReview(View v) {
 
-        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.overallRating);
         rating = ratingBar.getRating();
 
         Review review = new Review();
+        review.setUsername(username);
         review.setRestaurantName(restaurantName);
         review.setRestaurantCity(restaurantCity);
         review.setRating(rating);
 
         boolean insertSuccess = helper.insertReview(review);
-        Log.d("My_Log", "Information inserted: " + rating + " " + restaurantName + " " + restaurantCity
-                + insertSuccess);
         if(insertSuccess==true) {
             Intent newIntent = new Intent(this, LoginLanding.class);
             newIntent.putExtra("ReviewDetails_username", username);
