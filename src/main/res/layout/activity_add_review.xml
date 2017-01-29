@@ -11,86 +11,113 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.beginner.doughboys.AddReviewActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/doughboy_square_for_droid"
-        android:id="@+id/reviewPhoto"
-        android:layout_marginBottom="225dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true" />
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/pageLinear"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="325dp">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            app:srcCompat="@drawable/doughboy_square_for_droid"
+            android:id="@+id/reviewPhoto"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true" />
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:text="@string/city"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView11"
-                android:textSize="24sp"
-                android:layout_marginRight="15dp"
-                android:layout_weight="0" />
-
-            <EditText
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/restaurantCityEditText"
-                android:textSize="24sp"
-                android:layout_weight="1"
-                android:background="@drawable/underline"/>
-        </LinearLayout>
+                android:layout_alignParentTop="false"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/reviewPhoto"
+                android:id="@+id/reviewInfo"
+                android:layout_alignParentBottom="true">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <TextView
-                android:text="@string/restaurant_name"
+                    <TextView
+                        android:text="@string/city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView11"
+                        android:textSize="24sp"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="0" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/restaurantCityEditText"
+                        android:textSize="24sp"
+                        android:layout_weight="1"
+                        android:background="@drawable/underline"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:text="@string/restaurant_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView11"
+                        android:textSize="24sp"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="0" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/restaurantNameEditText"
+                        android:textSize="24sp"
+                        android:layout_weight="1"
+                        android:background="@drawable/underline"/>
+                </LinearLayout>
+
+
+                <Button
+                    android:text="@string/next"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="30dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/button8"
+                    android:textSize="18sp"
+                    android:background="@drawable/rounded_corner_button"
+                    android:onClick="nextReviewPage"/>
+
+
+            </LinearLayout>
+
+            <Button
+                android:text="@string/add_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView11"
-                android:textSize="24sp"
-                android:layout_marginRight="15dp"
-                android:layout_weight="0" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/restaurantNameEditText"
-                android:textSize="24sp"
-                android:layout_weight="1"
-                android:background="@drawable/underline"/>
-        </LinearLayout>
-
-
-        <Button
-            android:text="@string/next"
-            android:layout_width="match_parent"
-            android:layout_marginTop="30dp"
-            android:layout_height="35dp"
-            android:id="@+id/button8"
-            android:textSize="18sp"
-            android:background="@drawable/rounded_corner_button"
-            android:onClick="nextReviewPage"/>
-
+                android:id="@+id/button9"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
 
     </LinearLayout>
 

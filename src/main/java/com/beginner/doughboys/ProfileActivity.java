@@ -81,19 +81,35 @@ public class ProfileActivity extends AppCompatActivity {
         Cursor thisCursor = restaurantHelper.getAllData();
 
         StringBuffer buffer = new StringBuffer();
-        buffer.append("Reviews:"+"\n\n");
+        StringBuffer labelBuffer = new StringBuffer();
 
         while(thisCursor.moveToNext()) {
             if(thisCursor.getString(1).equals(username)) {
-                buffer.append("City: " + thisCursor.getString(3) + "\n");
-                buffer.append("Restaurant: " + thisCursor.getString(2) + "\n");
-                buffer.append("Overall Rating: " + thisCursor.getString(4)+"\n\n");
+                labelBuffer.append("City:" + "\n");
+                labelBuffer.append("Restaurant:" + "\n");
+                labelBuffer.append("Rating:" + "\n\n");
+
+                buffer.append("   " + thisCursor.getString(3) + "\n");
+                buffer.append("   " + thisCursor.getString(2) + "\n");
+                buffer.append("   " + thisCursor.getString(4)+"\n\n");
             }
 
+            TextView LabelView = (TextView) findViewById(R.id.profileLabelViews);
+            LabelView.setText(labelBuffer.toString());
             TextView ReviewView = (TextView) findViewById(R.id.profileReviewTextView);
             ReviewView.setText(buffer.toString());
             Log.d("MY_LOG", thisCursor.getString(0)+ thisCursor.getString(1)+
                     thisCursor.getString(2)+ thisCursor.getString(3) + thisCursor.getString(4));
         }
+    }
+
+    public void addReview(View v) {
+        Intent intent = new Intent(this, AddReviewActivity.class);
+        intent.putExtra("LoginLanding_username", username);
+        startActivity(intent);
+    }
+
+    public void goHome(View v) {
+        finish();
     }
 }

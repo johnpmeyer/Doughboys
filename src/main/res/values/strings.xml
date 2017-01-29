@@ -25,4 +25,5 @@
     <string name="cost">Cost</string>
     <string name='sauce'>Sauce</string>
     <string name="overall_rating">Overall Rating</string>
+    <string name="add_photo">Add Photo</string>
 </resources>

@@ -14,6 +14,7 @@ import static com.beginner.doughboys.R.string.username;
 
 public class LoginLanding extends AppCompatActivity {
     DatabaseHelper helper = new DatabaseHelper(this);
+    RestaurantDatabaseHelper restaurantHelper = new RestaurantDatabaseHelper(this);
     String usernameIntent;
     String id, name, email, password;
 
@@ -21,16 +22,18 @@ public class LoginLanding extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_landing);
+        showProfiles();
+    }
+
+    public void showProfiles() {
         Cursor thisCursor = helper.getAllData();
+        Cursor restaurantCursor = restaurantHelper.getAllData();
 
         Intent intent = getIntent();
         // If intent equals Profile Screen, set userNameIntent to a the value FROM profile.
         boolean hasUsernamefromSignin = intent.hasExtra("Signin_username");
         boolean hasUsernamefromUpdate = intent.hasExtra("Update_username");
         boolean hasUsernamefromReview = intent.hasExtra("ReviewDetails_username");
-        Log.d("my_log", "Signin: " + hasUsernamefromSignin);
-        Log.d("my_log", "Update: " + hasUsernamefromUpdate);
-        Log.d("my_log", "Review: " + hasUsernamefromReview);
 
         if (hasUsernamefromSignin==true) {
             usernameIntent = intent.getStringExtra("Signin_username");
@@ -44,9 +47,9 @@ public class LoginLanding extends AppCompatActivity {
             showMessage("Error", "No Profiles Found");
             return;
         } else {
-            StringBuffer buffer = new StringBuffer();
+            StringBuffer dynamicBuffer = new StringBuffer();
+            StringBuffer staticBuffer = new StringBuffer();
             while(thisCursor.moveToNext()) {
-                buffer.append("Username: " + thisCursor.getString(3)+"\n\n");
                 id = thisCursor.getString(0);
                 name = thisCursor.getString(1);
                 email = thisCursor.getString(2);
@@ -56,12 +59,18 @@ public class LoginLanding extends AppCompatActivity {
                 }
             }
 
-            while(thisCursor.moveToNext()) {
-                buffer.append("Username: "+thisCursor.getString(3) + "\n\n");
+            while(restaurantCursor.moveToNext()) {
+                staticBuffer.append("Username:\n" + "Restaurant Name:\n" + "Restaurant City:\n" + "Rating:\n\n");
+                dynamicBuffer.append(restaurantCursor.getString(1) + "\n" + restaurantCursor.getString(2) + "\n" +
+                        restaurantCursor.getString(3) + "\n" + restaurantCursor.getString(4) + "\n\n");
+
             }
 
+            TextView labels = (TextView) findViewById(R.id.labelViews);
+            labels.setText(staticBuffer.toString());
+
             TextView profiles = (TextView) findViewById(R.id.profileData);
-            profiles.setText(buffer.toString());
+            profiles.setText(dynamicBuffer.toString());
         }
     }
 
@@ -71,7 +80,6 @@ public class LoginLanding extends AppCompatActivity {
         builder.setTitle(title);
         builder.setMessage(message);
         builder.show();
-
     }
 
     public void goToProfile(View v) {
