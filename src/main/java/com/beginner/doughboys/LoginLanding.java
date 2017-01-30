@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import static com.beginner.doughboys.R.string.username;
@@ -60,17 +61,48 @@ public class LoginLanding extends AppCompatActivity {
             }
 
             while(restaurantCursor.moveToNext()) {
-                staticBuffer.append("Username:\n" + "Restaurant Name:\n" + "Restaurant City:\n" + "Rating:\n\n");
-                dynamicBuffer.append(restaurantCursor.getString(1) + "\n" + restaurantCursor.getString(2) + "\n" +
-                        restaurantCursor.getString(3) + "\n" + restaurantCursor.getString(4) + "\n\n");
+                //staticBuffer.append("Username:\n" + "Restaurant Name:\n" + "Restaurant City:\n" + "Rating:\n\n");
+                /*dynamicBuffer.append(restaurantCursor.getString(1) + "\n" + restaurantCursor.getString(2) + "\n" +
+                        restaurantCursor.getString(3) + "\n" + restaurantCursor.getString(4) + "\n\n");*/
+                LinearLayout linearLayoutTitles = (LinearLayout) findViewById(R.id.reviewLabels);
+                for(int i=0; i<5; i++) {
+                    TextView myNewTextView = (TextView) getLayoutInflater().inflate(R.layout.dynamic_textview_labels, null);
+                    linearLayoutTitles.addView(myNewTextView);
+
+                    switch(i) {
+                        case 0: myNewTextView.setText("Username:");
+                            break;
+                        case 1: myNewTextView.setText("City:");
+                            break;
+                        case 2: myNewTextView.setText("Restaurant:");
+                            break;
+                        case 3: myNewTextView.setText("Rating:");
+                            break;
+                        case 4: myNewTextView.setText("");
+                            break;
+                    }
+                }
+
+                LinearLayout linearLayout = (LinearLayout) findViewById(R.id.reviewInfo);
+                for(int i=0; i<5; i++) {
+                    TextView myNewTextView = (TextView) getLayoutInflater().inflate(R.layout.dynamic_textview, null);
+                    linearLayout.addView(myNewTextView);
+
+                    switch(i) {
+                        case 0: myNewTextView.setText(restaurantCursor.getString(1));
+                            break;
+                        case 1: myNewTextView.setText(restaurantCursor.getString(2));
+                            break;
+                        case 2: myNewTextView.setText(restaurantCursor.getString(3));
+                            break;
+                        case 3: myNewTextView.setText(restaurantCursor.getString(4));
+                            break;
+                        case 4: myNewTextView.setText("");
+                            break;
+                    }
+                }
 
             }
-
-            TextView labels = (TextView) findViewById(R.id.labelViews);
-            labels.setText(staticBuffer.toString());
-
-            TextView profiles = (TextView) findViewById(R.id.profileData);
-            profiles.setText(dynamicBuffer.toString());
         }
     }
 

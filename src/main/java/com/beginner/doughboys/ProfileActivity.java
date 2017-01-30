@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,26 +81,46 @@ public class ProfileActivity extends AppCompatActivity {
 
         Cursor thisCursor = restaurantHelper.getAllData();
 
-        StringBuffer buffer = new StringBuffer();
-        StringBuffer labelBuffer = new StringBuffer();
-
         while(thisCursor.moveToNext()) {
             if(thisCursor.getString(1).equals(username)) {
-                labelBuffer.append("City:" + "\n");
-                labelBuffer.append("Restaurant:" + "\n");
-                labelBuffer.append("Rating:" + "\n\n");
+                LinearLayout linearLayoutTitles = (LinearLayout) findViewById(R.id.profileLabels);
 
-                buffer.append("   " + thisCursor.getString(3) + "\n");
-                buffer.append("   " + thisCursor.getString(2) + "\n");
-                buffer.append("   " + thisCursor.getString(4)+"\n\n");
+                for(int i=0; i<5; i++) {
+                    TextView myNewTextView = (TextView) getLayoutInflater().inflate(R.layout.dynamic_textview_labels, null);
+                    linearLayoutTitles.addView(myNewTextView);
+                    switch(i) {
+                        case 0: myNewTextView.setText("Username:");
+                            break;
+                        case 1: myNewTextView.setText("City:");
+                            break;
+                        case 2: myNewTextView.setText("Restaurant:");
+                            break;
+                        case 3: myNewTextView.setText("Rating:");
+                            break;
+                        case 4: myNewTextView.setText("");
+                            break;
+                    }
+                }
+
+                LinearLayout linearLayout = (LinearLayout) findViewById(R.id.profileReviewInfo);
+                for(int i=0; i<5; i++) {
+                    TextView myNewTextView = (TextView) getLayoutInflater().inflate(R.layout.dynamic_textview, null);
+                    linearLayout.addView(myNewTextView);
+
+                    switch(i) {
+                        case 0: myNewTextView.setText(thisCursor.getString(1));
+                            break;
+                        case 1: myNewTextView.setText(thisCursor.getString(2));
+                            break;
+                        case 2: myNewTextView.setText(thisCursor.getString(3));
+                            break;
+                        case 3: myNewTextView.setText(thisCursor.getString(4));
+                            break;
+                        case 4: myNewTextView.setText("");
+                            break;
+                    }
+                }
             }
-
-            TextView LabelView = (TextView) findViewById(R.id.profileLabelViews);
-            LabelView.setText(labelBuffer.toString());
-            TextView ReviewView = (TextView) findViewById(R.id.profileReviewTextView);
-            ReviewView.setText(buffer.toString());
-            Log.d("MY_LOG", thisCursor.getString(0)+ thisCursor.getString(1)+
-                    thisCursor.getString(2)+ thisCursor.getString(3) + thisCursor.getString(4));
         }
     }
 
